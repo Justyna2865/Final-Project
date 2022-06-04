@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VOLVO CARS</title>
+    <!-- <link rel='stylesheet' href="styles/global.css"/>     -->
+    <link rel='stylesheet' href="start.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+        <!-- FORM  -->
+<!-- Button trigger modal -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+    Launch demo modal
+  </button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content p-4">
+        <h1>Informacje dotyczace zakupu</h1><br>
+        <form class="form" id="form">
+            <div class="form-box" id="form-payment">
+                <label for="payment">Sposób płatności:</label><br>
+                <input class="form-check-input" type="radio" id="input-leasing" name="payment" onchange="checkInputData()"/>
+                <label class="form-check-label" for="leasing">Leasing</label><br>
+                <input class="form-check-input" type="radio" id="input-cash" name="payment" onchange="checkInputData()"/>
+                <label class="form-check-label" for="cash">Gotówka</label>
+            </div><br>
+            <div class="form-box" data-errormsg="">
+                <legend>Dane osobowe:</legend>
+                <div>
+                    <input class="form-control" type="text" id="input-name"  placeholder="Imię" onchange="checkInputData(), sendLocal()"/><br>
+                </div>
+                <input class="form-control" type="text" id="input-surname"  placeholder="Nazwisko" onchange="checkInputData(), sendLocal()"/><br>
+            </div>
+            <div class="form-box">
+                <legend>Informacje o dostawie:</legend>
+                <label for="data">Data dostawy:</label>
+                <input type="data-form" class="form control" id="currentDate" disabled><br>
+                <input class="form-control" type="text" id="input-adress" placeholder="Miejsce odbioru" onchange="checkInputData()"/><br>
+            </div><br> 
+            <div class="list-group">
+                <legend>Wybór akcesoriów:</legend>
+                <label for="list-group"></label>
+                <label class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" id="Elektronika">
+                  Elektronika samochodowa
+                  <span class="badge bg-primary rounded-pill">10 000 zł</span>
+                </label>
+                <label class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" id="Dodatki">
+                  Dodatki zewnętrzne
+                  <span class="badge bg-primary rounded-pill">5 000 zł</span>
+                </label>
+                <label class="list-group-item">
+                  <input class="form-check-input me-1" type="checkbox" id="Narzędzia">
+                  Narzędzia przydatne w podróży oraz sytuacji awaryjnej
+                  <span class="badge bg-primary rounded-pill">1000 zł</span>
+                </label>
+              </div>
+              <div class="form-box">
+                <label for="price">Cena całkowita:</label>
+                <input type="number" class="form control" id="total-price" name="tprice" readonly>
+            </div>
+            <div>
+                <button type="button">Powrót do wyboru</button>
+                <button type="button" onclick="checkInputData()">Zakup</button>
+            </div>          
+        </form>
+        <!-- <form class="row g-3">
+            <div class="col-md-6">
+              <label for="inputName" class="form-label">Imię i Nazwisko</label>
+              <input type="text" class="form-control" id="inputName">
+            </div>
+            <div class="col-12">
+                <label for="inputData" class="form-label">Data dostawy</label>
+                <input type="datetime-local" class="form-control" id="inputData">
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Leasing
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                  Gotówka
+                </label>
+              </div>
+            <div class="col-md-6">
+              <label for="inputSurname" class="form-label">Nazwisko</label>
+              <input type="password" class="form-control" id="inputSurname">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label">Address 2</label>
+              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">State</label>
+              <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Check me out
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </form> -->
+      </div>
+    </div>
+  </div>
+
+<!-- Navbar  -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container">
+                  <a class="navbar-brand" href="logo.jpg">
+                    <img class="logo" src="logo.jpg" alt="" width="120" height="96">
+                  </a>
+                </div>
+              </nav>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Serwis</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dealerzy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Jazdy próbne</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Kontakt</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <!-- <img src="header_page2.jpg" class="w-100 p-3" alt="Header"> -->
+      <div id="intro" class="bg-image shadow-1-strong" style="
+      background-image: url(header_8.jpg);
+      height: 650px;
+      width: auto;
+    ">
+  <div class="mask text-white" style="background-color: rgba(0, 0, 0, 0.6); margin-top: 1px">
+    <div class="container d-flex align-items-center justify-content-center text-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Volvo Cars</h1>
+        <h4 class="mb-4">Bezpieczeństwo&Technologia&Pasja</h4>
+        <a class="btn btn-outline-light btn-lg mb-3" href="#scroll-target" role="button">Sprawdź ofertę
+          <i class="fas fa-gem ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Shopping cards -->
+
+ <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+    <a class="navbar-brand ml-2 font-weight-bold" href="#">
+        <h1 id="scroll-target">Nasze samochody</h1></a>
+    <div class="collapse navbar-collapse" id="navbarColor">
+        <ul class="navbar-nav"></ul>        
+    </div>    
+</nav>
+
+<!-- <div class="filter">
+    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span></button>
+</div>
+<div id="mobile-filter">
+    <p class="pl-sm-0 pl-2"> Home | <b>All Breads</b></p>
+    <div class="border-bottom pb-2 ml-2">
+        <h4 id="burgundy">Filters</h4>
+    </div> -->
+    <div class="py-2 border-bottom ml-3">
+        <h4 class="font-weight-bold">Napęd</h4>
+        <form>
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" id="Elektryczne">
+                <label for="Elektryczne">Elektryczne</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" id="Hybrydy">
+                <label for="Hybrydy">Hybrydy</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" id="Mild">
+                <label for="Mild-Hybrid">Mild-Hybrid</label>
+            </div>                                
+        </form>
+    </div>
+
+    <section id="products">
+        <div class="container">
+            <div class="d-flex flex-row">
+                <div class="text-muted m-2" id="res">Showing 44 results</div>
+                <div class="ml-auto mr-lg-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                        <div><span class="h4" id="car1">500 000 zł</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" onclick="inputPriceData()" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                    <div class="card mb-5" style="height: 400px">
+                        <img class="card-img-top" src="header_2.jpg">
+                        <div class="card-body"  >
+                            <h5><b>Nazwa model</b> </h5>
+                            <div class="d-flex flex-row my-2">
+                                <div class="ml-auto">
+                                    <div class="product-info">
+                                        <div>Marka: <span class="value">5 inch</span></div>
+                                        <div>Rok: <span class="value">4GB</span></div>
+                                        <div>Rocznik: <span class="value">32GB</span></div>
+                                        <div>Moc silnika: <span class="value">32GB</span></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Wybierz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer class="bg-light text-center">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Form -->
+          <section class="">
+            <form action="">
+              <!--Grid row-->
+              <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-auto">
+                  <p class="pt-2">
+                    <strong>Sign up for our newsletter</strong>
+                  </p>
+                </div>
+                <!--Grid column-->
+      
+                <!--Grid column-->
+                <div class="col-md-5 col-12">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form5Example27" class="form-control" />
+                    <label class="form-label" for="form5Example27">Email address</label>
+                  </div>
+                </div>
+                <!--Grid column-->
+      
+                <!--Grid column-->
+                <div class="col-auto">
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary mb-4">
+                    Subscribe
+                  </button>
+                </div>
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+            </form>
+          </section>
+          <!-- Section: Form -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            Copyright © 2021 Volvo Car Corporation (or its affiliates or licensors)
+        </div>
+        <!-- Copyright -->
+      </footer>
+ 
+      
+ 
+
+
+    <!-- <div class="container-sm">container-sm</div>
+    <div class="container-md">container-md</div>
+    <div class="container-lg">container-lg</div>
+    <div class="container-xl">container-xl</div>
+    <div class="container-xxl">container-xxl</div>
+    <div class="container-fluid">container-fluid</div> -->
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="./start.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
